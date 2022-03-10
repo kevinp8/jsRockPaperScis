@@ -1,5 +1,7 @@
 Array.from(document.querySelectorAll('.choice')).forEach(element => element.addEventListener('click', game))
 
+document.querySelector('#nextRound').addEventListener('click', next)
+
 let playerPoints = 0
 let cpuPoints = 0
 
@@ -19,8 +21,9 @@ function computerPlay() {
 }
 
 function checkScore() {
-    if (playerPoints === 5 || cpuPoints === 5)
+    if (playerPoints === 5 || cpuPoints === 5) {
     document.querySelector('#endPop').classList.toggle('hidden')
+    }
     if (playerPoints > cpuPoints) {
         document.querySelector('#whoWonGame').textContent = 'YOU WIN THE GAME!'
         document.querySelector('#finalScores').textContent = `${playerPoints} - ${cpuPoints}`
@@ -30,11 +33,20 @@ function checkScore() {
     }
 }
 
+function next() {
+    document.querySelector('.rock').classList.remove('hidden')
+    document.querySelector('.paper').classList.remove('hidden')
+    document.querySelector('.scissors').classList.remove('hidden')
+    document.querySelector('#nextRound').classList.toggle('hidden')
+    document.querySelector('#whoWonRound').textContent = ''
+}
+
 function oneRound(playerChoice){
     const cpuChoice = computerPlay()
     if (playerChoice === 'rock') {
         if (cpuChoice === 'rock') {
             document.querySelector('#whoWonRound').textContent = 'Tie!'
+            checkScore()
         }
         if (cpuChoice === 'paper') {
             document.querySelector('#whoWonRound').textContent = 'Computer wins the round!'
@@ -85,15 +97,25 @@ function oneRound(playerChoice){
     }
 }
 
+function hide() {
+    document.querySelector('.rock').classList.add('hidden')
+    document.querySelector('.paper').classList.add('hidden')
+    document.querySelector('.scissors').classList.add('hidden')
+    document.querySelector('#nextRound').classList.toggle('hidden')
+}
+
 function game(click) {
     if (click.target.classList.contains('rock')) {
         oneRound('rock')
+        hide()
     }
     if (click.target.classList.contains('paper')) {
         oneRound('paper')
+        hide()
     }
     if (click.target.classList.contains('scissors')) {
         oneRound('scissors')
+        hide()
     }
 }
 

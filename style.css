@@ -76,3 +76,9 @@ a{
     color: white;
     font-size: 2vw;
 }
+#nextRound {
+    background-color: green;
+    font-size: 2vw;
+    font-family: 'Smooch Sans', sans-serif;
+    padding: 1.5vw;
+}
